@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "oxkdfcLPiyqdgbUtYtIFXns1TrvKaGrkssws0qJkd34=",
+  "Source": "FitHubAdmin.API",
+  "BasePath": "_content/FitHubAdmin.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
