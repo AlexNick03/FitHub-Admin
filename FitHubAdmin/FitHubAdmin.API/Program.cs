@@ -1,4 +1,5 @@
 ﻿using FitHubAdmin.Data;
+using FitHubAdmin.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite("Data Source=fithub.db"));
 
+builder.Services.AddScoped<ClientService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -17,7 +19,7 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<AppDbContext>();
-    context.Database.EnsureCreated(); 
+    context.Database.EnsureCreated();
 }
 
 app.UseSwagger();
