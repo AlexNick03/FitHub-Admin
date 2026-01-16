@@ -9,15 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fd078620-09da-4dcf-83e8-7f85f6b8cc34" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.FitHubAdmin.API.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FitHubAdmin.API.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/ClientsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/ClientsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/AbonamentService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/AbonamentService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/ClientService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/ClientService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fithub.db" beforeDir="false" afterPath="$PROJECT_DIR$/fithub.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/FitHubAdmin.API.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/FitHubAdmin.API.AssemblyInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/FitHubAdmin.API.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/FitHubAdmin.API.AssemblyInfoInputs.cache" afterDir="false" />
-    </list>
+    <list default="true" id="fd078620-09da-4dcf-83e8-7f85f6b8cc34" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -123,7 +115,7 @@
       <updated>1768586059255</updated>
       <workItem from="1768586061456" duration="513000" />
       <workItem from="1768586774340" duration="62000" />
-      <workItem from="1768588448542" duration="620000" />
+      <workItem from="1768588448542" duration="969000" />
     </task>
     <servers />
   </component>
