@@ -36,13 +36,25 @@ namespace FitHubAdmin.Services
 
         public async Task CreateAbonamentAsync(CreateAbonamentDto dto)
         {
+            // Validare Abonament Existent
+            // Cautam in baza de date orice abonament al acestui client care expira in viitor
+            bool areAbonamentActiv = await _context.Abonamente
+                .AnyAsync(a => a.ClientId == dto.ClientId && a.DataExpirare > DateTime.Now);
+
+            if (areAbonamentActiv)
+            {
+                //Aruncam o eroare controlata.
+                throw new InvalidOperationException("Acest client are deja un abonament activ! Nu se pot suprapune.");
+            }
+
             var abonament = new Abonament
             {
                 Tip = dto.Tip,
                 Pret = dto.Pret,
                 ClientId = dto.ClientId,
                 DataStart = DateTime.Now,
-                DataExpirare = DateTime.Now.AddMonths(1)
+                // Pastram logica ta de demo (2 minute) sau pui AddMonths(1)
+                DataExpirare = DateTime.Now.AddMinutes(2) 
             };
 
             _context.Abonamente.Add(abonament);
