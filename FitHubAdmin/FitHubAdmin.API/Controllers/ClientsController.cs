@@ -24,8 +24,21 @@ namespace FitHubAdmin.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateClient([FromBody] CreateClientDto dto)
         {
-            await _service.CreateClientAsync(dto);
-            return Ok("Client creat cu succes!");
+            try
+            {
+                await _service.CreateClientAsync(dto);
+                return Ok(new { Mesaj = "Client creat cu succes!" });
+            }
+            catch (InvalidOperationException ex)
+            {
+                // Aici prindem eroarea cu "Email deja folosit"
+                return BadRequest(new { Eroare = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                // Aici prindem orice alta eroare neasteptata
+                return StatusCode(500, "Eroare interna server.");
+            }
         }
     }
 }

@@ -30,6 +30,12 @@ namespace FitHubAdmin.Controllers
                 await _service.CreateAbonamentAsync(dto);
                 return Ok("Abonament creat cu succes!");
             }
+            catch (KeyNotFoundException ex)
+            {
+                // Aici intram cand ID-ul clientului e gresit
+                // Returnam 404 Not Found cu mesajul tau
+                return NotFound(new { Eroare = ex.Message });
+            }
             catch (InvalidOperationException ex)
             {
                 // Daca Service-ul zice ca exista deja, returnam 400 Bad Request cu mesajul nostru

@@ -34,7 +34,13 @@ namespace FitHubAdmin.Services
         }
 
         public async Task CreateAbonamentAsync(CreateAbonamentDto dto)
-        {
+        {   // 0. Validare client existent.
+            var existaClient = await _context.Clienti.AnyAsync(c => c.Id == dto.ClientId);
+            if (!existaClient)
+            {
+                // Aruncam o eroare specifica daca nu il gasim
+                throw new KeyNotFoundException($"Nu există niciun client cu ID-ul {dto.ClientId}!");
+            } 
             // A. Validare Suprapunere (codul vechi)
             bool areAbonamentActiv = await _context.Abonamente
                 .AnyAsync(a => a.ClientId == dto.ClientId && a.DataExpirare > DateTime.Now);

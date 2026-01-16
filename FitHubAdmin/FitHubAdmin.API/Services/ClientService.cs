@@ -52,6 +52,17 @@ namespace FitHubAdmin.Services
 
         public async Task CreateClientAsync(CreateClientDto dto)
         {
+            // 1. Verificam daca emailul exista deja in baza de date
+            var existaEmail = await _context.Clienti
+                .AnyAsync(c => c.Email == dto.Email);
+
+            if (existaEmail)
+            {
+                // Aruncam o eroare pe care o vom prinde in Controller
+                throw new InvalidOperationException("Adresa de email este deja folosita de alt client!");
+            }
+
+            // 2. Daca nu exista, continuam cu crearea
             var clientNou = new Client
             {
                 Nume = dto.Nume,
