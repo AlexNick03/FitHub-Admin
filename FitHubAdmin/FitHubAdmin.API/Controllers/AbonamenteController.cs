@@ -24,8 +24,22 @@ namespace FitHubAdmin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateAbonamentDto dto)
         {
-            await _service.CreateAbonamentAsync(dto);
-            return Ok("Abonament creat cu succes!");
+            try
+            {
+                // Incercam sa cream abonamentul
+                await _service.CreateAbonamentAsync(dto);
+                return Ok("Abonament creat cu succes!");
+            }
+            catch (InvalidOperationException ex)
+            {
+                // Daca Service-ul zice ca exista deja, returnam 400 Bad Request cu mesajul nostru
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                // Pentru orice alta eroare neprevazuta
+                return StatusCode(500, "A aparut o eroare interna.");
+            }
         }
 
         [HttpDelete("{id}")]
