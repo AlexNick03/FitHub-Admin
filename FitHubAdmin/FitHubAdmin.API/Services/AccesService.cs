@@ -53,5 +53,20 @@ namespace FitHubAdmin.Services
 
             return raspuns;
         }
+        
+        public async Task<List<IstoricAccesResponseDto>> GetIstoricCompletAsync()
+        {
+            return await _context.IstoricAcces
+                .Include(i => i.Client) // <--- Foarte important: Aduce si datele clientului (Numele)
+                .OrderByDescending(i => i.DataAcces) // Cele mai noi intrari primele
+                .Select(i => new IstoricAccesResponseDto
+                {
+                    Id = i.Id,
+                    // Daca cumva clientul a fost sters intre timp, punem un text default
+                    NumeClient = i.Client != null ? i.Client.Nume : "Client Șters",
+                    DataAcces = i.DataAcces
+                })
+                .ToListAsync();
+        }
     }
 }
