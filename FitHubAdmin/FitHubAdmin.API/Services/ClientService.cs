@@ -21,15 +21,15 @@ namespace FitHubAdmin.Services
                 .Include(c => c.Abonamente)
                 .ToListAsync();
 
-            // 2. Procesam datele in memorie (mai sigur pentru logica complexa)
+            // 2. Procesam datele in memorie
             var listaRaspuns = new List<ClientResponseDto>();
 
             foreach (var c in clienti)
             {
-                // Cautam daca exista un abonament care expira in viitor (deci e valid)
+                // Cautam daca exista un abonament care expira in viitor
                 var abonamentActiv = c.Abonamente
-                    .Where(a => a.DataExpirare > DateTime.Now) // Doar cele valide
-                    .OrderByDescending(a => a.DataExpirare)    // Cel mai recent (daca are mai multe)
+                    .Where(a => a.DataExpirare > DateTime.Now) 
+                    .OrderByDescending(a => a.DataExpirare)    
                     .FirstOrDefault();
 
                 listaRaspuns.Add(new ClientResponseDto
@@ -41,8 +41,9 @@ namespace FitHubAdmin.Services
                     // Logica Activ/Inactiv
                     StatusAbonament = abonamentActiv != null ? "Activ" : "Inactiv",
             
-                    // Logica Tip (Daca e activ, scriem tipul, altfel "-")
-                    TipAbonament = abonamentActiv != null ? abonamentActiv.Tip : "-"
+                    // CORECTIA ESTE AICI:
+                    // Trebuie sa convertim Enum-ul (Bronze/Silver) in text folosind .ToString()
+                    TipAbonament = abonamentActiv != null ? abonamentActiv.Tip.ToString() : "-" 
                 });
             }
 
