@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FitHubAdmin.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+51db3e1e7108ca8c962410ecfd9da5619b5003bd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4d473b0e6276ede8bcd93d24bea788761f9da2c1")]
 [assembly: System.Reflection.AssemblyProductAttribute("FitHubAdmin.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FitHubAdmin.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
