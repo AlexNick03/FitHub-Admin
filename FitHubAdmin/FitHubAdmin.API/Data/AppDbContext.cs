@@ -8,5 +8,8 @@ namespace FitHubAdmin.Data
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         public DbSet<Client> Clienti { get; set; }
+        
+        // Tabela pentru Abonamente
+        public DbSet<Abonament> Abonamente { get; set; }
     }
 }
