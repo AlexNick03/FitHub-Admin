@@ -32,5 +32,11 @@ namespace FitHubAdmin.Controllers
                 return StatusCode(500, "Eroare interna: " + ex.Message);
             }
         }
+        [HttpGet("Istoric")]
+        public async Task<IActionResult> GetIstoric()
+        {
+            var istoric = await _service.GetIstoricCompletAsync();
+            return Ok(istoric);
+        }
     }
 }
