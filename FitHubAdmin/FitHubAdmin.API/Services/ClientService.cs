@@ -16,15 +16,37 @@ namespace FitHubAdmin.Services
 
         public async Task<List<ClientResponseDto>> GetAllClientsAsync()
         {
-            // FARA .Include( abonamente )
-            return await _context.Clienti
-                .Select(c => new ClientResponseDto
+            // 1. Luam toti clientii din DB impreuna cu abonamentele lor
+            var clienti = await _context.Clienti
+                .Include(c => c.Abonamente)
+                .ToListAsync();
+
+            // 2. Procesam datele in memorie (mai sigur pentru logica complexa)
+            var listaRaspuns = new List<ClientResponseDto>();
+
+            foreach (var c in clienti)
+            {
+                // Cautam daca exista un abonament care expira in viitor (deci e valid)
+                var abonamentActiv = c.Abonamente
+                    .Where(a => a.DataExpirare > DateTime.Now) // Doar cele valide
+                    .OrderByDescending(a => a.DataExpirare)    // Cel mai recent (daca are mai multe)
+                    .FirstOrDefault();
+
+                listaRaspuns.Add(new ClientResponseDto
                 {
                     Id = c.Id,
                     Nume = c.Nume,
                     Email = c.Email,
-                })
-                .ToListAsync();
+            
+                    // Logica Activ/Inactiv
+                    StatusAbonament = abonamentActiv != null ? "Activ" : "Inactiv",
+            
+                    // Logica Tip (Daca e activ, scriem tipul, altfel "-")
+                    TipAbonament = abonamentActiv != null ? abonamentActiv.Tip : "-"
+                });
+            }
+
+            return listaRaspuns;
         }
 
         public async Task CreateClientAsync(CreateClientDto dto)
