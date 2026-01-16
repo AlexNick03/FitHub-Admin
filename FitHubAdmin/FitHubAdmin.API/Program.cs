@@ -11,6 +11,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddScoped<ClientService>();
 builder.Services.AddScoped<AbonamentService>();
+builder.Services.AddScoped<AccesService>();
 builder.Services.AddControllers().AddJsonOptions(options =>
     {
         // Asta pastreaza functionalitatea de a scrie "Lunar" in loc de cifre
