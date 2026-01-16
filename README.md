@@ -21,3 +21,8 @@ Ai nevoie doar de **Docker Desktop** instalat.
 Clonează repository-ul:
    ```bash
    git clone <link-ul-tau-de-github>
+```
+Deschide terminalul în folderul proiectului și rulează
+ ```bash
+   docker-compose up --build
+```
