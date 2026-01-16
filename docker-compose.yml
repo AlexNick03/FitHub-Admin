@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  fithub-api:
+    image: fithub-admin
+    build:
+      context: .
+      dockerfile: FitHubAdmin/Dockerfile
+    ports:
+      - "5000:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+      - ./data:/app/data

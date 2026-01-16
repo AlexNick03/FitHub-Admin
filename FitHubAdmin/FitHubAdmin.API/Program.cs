@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlite("Data Source=fithub.db"));
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
     
 builder.Services.AddScoped<ClientService>();
 builder.Services.AddScoped<AbonamentService>();
@@ -39,16 +39,30 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-    var context = services.GetRequiredService<AppDbContext>();
-    context.Database.EnsureCreated();
+    try
+    {
+        var context = services.GetRequiredService<AppDbContext>();
+        context.Database.Migrate(); // Asta aplica migrarile si creeaza baza daca nu exista
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("Eroare la migrarea bazei de date: " + ex.Message);
+    }
+}
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "FitHub Admin API v1");
+        c.RoutePrefix = "swagger";
+    });
+    app.MapGet("/", context => {
+        context.Response.Redirect("/swagger/index.html");
+        return Task.CompletedTask;
+    });
 }
 
-app.UseSwagger();
-app.UseSwaggerUI(c =>
-{
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "FitHub Admin API v1");
-    c.RoutePrefix = "swagger";
-});
 
 //app.UseHttpsRedirection();
 app.UseAuthorization();
