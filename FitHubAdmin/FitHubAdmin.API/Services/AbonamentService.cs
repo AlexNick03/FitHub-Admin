@@ -18,16 +18,15 @@ namespace FitHubAdmin.Services
         public async Task<List<AbonamentResponseDto>> GetAllAbonamenteAsync()
         {
             return await _context.Abonamente
-                .Include(a => a.Client) // <--- IMPORTANT: Aduce datele clientului
+                .Include(a => a.Client)
                 .Select(a => new AbonamentResponseDto
                 {
                     Id = a.Id,
-                    Tip = a.Tip,
+                    Tip = a.Tip,       // Convertim Enum la text
+                    Durata = a.Durata, // Convertim Enum la text
                     Pret = a.Pret,
                     DataStart = a.DataStart,
                     DataExpirare = a.DataExpirare,
-
-                    // Mapam datele:
                     ClientId = a.ClientId,
                     NumeClient = a.Client != null ? a.Client.Nume : "Client Sters"
                 })
@@ -36,25 +35,59 @@ namespace FitHubAdmin.Services
 
         public async Task CreateAbonamentAsync(CreateAbonamentDto dto)
         {
-            // Validare Abonament Existent
-            // Cautam in baza de date orice abonament al acestui client care expira in viitor
+            // A. Validare Suprapunere (codul vechi)
             bool areAbonamentActiv = await _context.Abonamente
                 .AnyAsync(a => a.ClientId == dto.ClientId && a.DataExpirare > DateTime.Now);
 
             if (areAbonamentActiv)
             {
-                //Aruncam o eroare controlata.
-                throw new InvalidOperationException("Acest client are deja un abonament activ! Nu se pot suprapune.");
+                throw new InvalidOperationException("Acest client are deja un abonament activ!");
+            }
+
+            // B. CALCUL PRET (Matricea ta de preturi)
+            decimal pretCalculat = 0;
+
+            if (dto.Durata == DurataAbonament.Lunar)
+            {
+                switch (dto.Tip)
+                {
+                    case TipAbonament.Bronze: pretCalculat = 140; break;
+                    case TipAbonament.Silver: pretCalculat = 180; break;
+                    case TipAbonament.Gold:   pretCalculat = 250; break;
+                }
+            }
+            else // Anual
+            {
+                switch (dto.Tip)
+                {
+                    case TipAbonament.Bronze: pretCalculat = 1000; break;
+                    case TipAbonament.Silver: pretCalculat = 1150; break;
+                    case TipAbonament.Gold:   pretCalculat = 1225; break;
+                }
+            }
+
+            // C. CALCUL DATA EXPIRARE (Demo vs Real)
+            DateTime dataExpirare;
+        
+            if (dto.Durata == DurataAbonament.Lunar)
+            {
+                // LUNAR = 2 minute (PENTRU DEMO)
+                dataExpirare = DateTime.Now.AddMinutes(2);
+            }
+            else
+            {
+                // ANUAL = 1 an (REAL)
+                dataExpirare = DateTime.Now.AddYears(1);
             }
 
             var abonament = new Abonament
             {
                 Tip = dto.Tip,
-                Pret = dto.Pret,
+                Durata = dto.Durata,
+                Pret = pretCalculat, // <--- Pretul vine din calcul, nu de la user
                 ClientId = dto.ClientId,
                 DataStart = DateTime.Now,
-                // Pastram logica ta de demo (2 minute) sau pui AddMonths(1)
-                DataExpirare = DateTime.Now.AddMinutes(2) 
+                DataExpirare = dataExpirare
             };
 
             _context.Abonamente.Add(abonament);

@@ -5,7 +5,8 @@ namespace FitHubAdmin.Models
     public class Abonament
     {
         public int Id { get; set; }
-        public string Tip { get; set; } = string.Empty; // Lunar, Anual
+        public TipAbonament Tip { get; set; }      // Bronze, Silver, Gold
+        public DurataAbonament Durata { get; set; } // Lunar, Anual
         public decimal Pret { get; set; }
         public DateTime DataStart { get; set; }
         public DateTime DataExpirare { get; set; }

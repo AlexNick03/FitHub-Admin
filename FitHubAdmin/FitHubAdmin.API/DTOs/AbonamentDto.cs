@@ -1,21 +1,27 @@
+using FitHubAdmin.Models; // Ca sa recunoasca Enums
+
 namespace FitHubAdmin.DTOs
 {
     public class CreateAbonamentDto
     {
-        public string Tip { get; set; } = "Lunar";
-        public decimal Pret { get; set; }
+        // Swagger va face automat un Dropdown list pentru astea!
+        public TipAbonament Tip { get; set; } 
+        public DurataAbonament Durata { get; set; }
+        
         public int ClientId { get; set; }
     }
 
     public class AbonamentResponseDto
     {
         public int Id { get; set; }
-        public string Tip { get; set; } = string.Empty;
+        
+        // Le punem ca string in raspuns ca sa fie citibile
+        public TipAbonament Tip { get; set; } 
+        public DurataAbonament Durata { get; set; }
+        
         public decimal Pret { get; set; }
         public DateTime DataStart { get; set; }
         public DateTime DataExpirare { get; set; }
-
-        // AICI: Trimitem si ID-ul si Numele pentru UI
         public int ClientId { get; set; }
         public string NumeClient { get; set; } = string.Empty;
     }
