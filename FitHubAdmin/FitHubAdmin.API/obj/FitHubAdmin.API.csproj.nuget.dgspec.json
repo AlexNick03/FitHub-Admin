@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\iusti\\Documents\\GitHub\\FitHub-Admin\\FitHubAdmin\\FitHubAdmin.API\\FitHubAdmin.API.csproj": {}
+    "C:\\Users\\Alex\\Desktop\\IS2\\Laborator_1\\FitHub-Admin\\FitHubAdmin\\FitHubAdmin.API\\FitHubAdmin.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\iusti\\Documents\\GitHub\\FitHub-Admin\\FitHubAdmin\\FitHubAdmin.API\\FitHubAdmin.API.csproj": {
+    "C:\\Users\\Alex\\Desktop\\IS2\\Laborator_1\\FitHub-Admin\\FitHubAdmin\\FitHubAdmin.API\\FitHubAdmin.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\iusti\\Documents\\GitHub\\FitHub-Admin\\FitHubAdmin\\FitHubAdmin.API\\FitHubAdmin.API.csproj",
+        "projectUniqueName": "C:\\Users\\Alex\\Desktop\\IS2\\Laborator_1\\FitHub-Admin\\FitHubAdmin\\FitHubAdmin.API\\FitHubAdmin.API.csproj",
         "projectName": "FitHubAdmin.API",
-        "projectPath": "C:\\Users\\iusti\\Documents\\GitHub\\FitHub-Admin\\FitHubAdmin\\FitHubAdmin.API\\FitHubAdmin.API.csproj",
-        "packagesPath": "C:\\Users\\iusti\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\iusti\\Documents\\GitHub\\FitHub-Admin\\FitHubAdmin\\FitHubAdmin.API\\obj\\",
+        "projectPath": "C:\\Users\\Alex\\Desktop\\IS2\\Laborator_1\\FitHub-Admin\\FitHubAdmin\\FitHubAdmin.API\\FitHubAdmin.API.csproj",
+        "packagesPath": "C:\\Users\\Alex\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Alex\\Desktop\\IS2\\Laborator_1\\FitHub-Admin\\FitHubAdmin\\FitHubAdmin.API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\iusti\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Alex\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -83,7 +83,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.417/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Users\\Alex\\.dotnet\\sdk\\8.0.414/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
