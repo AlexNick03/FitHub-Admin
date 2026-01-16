@@ -8,20 +8,21 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite("Data Source=fithub.db"));
-
+    
 builder.Services.AddScoped<ClientService>();
 builder.Services.AddScoped<AbonamentService>();
+builder.Services.AddScoped<AccesService>();
 builder.Services.AddControllers().AddJsonOptions(options =>
     {
-        // Asta pastreaza functionalitatea de a scrie "Lunar" in loc de cifre
+        
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
     })
     .ConfigureApiBehaviorOptions(options =>
     {
-        // AICI E SMECHERIA PENTRU MESAJ PERSONALIZAT
+        
         options.InvalidModelStateResponseFactory = context =>
         {
-            // Cand apare o eroare de validare (ex: ai scris "Lunarr"), intram aici:
+           
             return new BadRequestObjectResult(new
             {
                 Eroare = "Date invalide!",

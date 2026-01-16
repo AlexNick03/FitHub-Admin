@@ -11,5 +11,7 @@ namespace FitHubAdmin.Data
         
         // Tabela pentru Abonamente
         public DbSet<Abonament> Abonamente { get; set; }
+        
+        public DbSet<IstoricAcces> IstoricAcces { get; set; }
     }
 }
