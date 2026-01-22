@@ -1,21 +1,23 @@
-using FitHubAdmin.Models; // Ca sa recunoasca Enums
+using FitHubAdmin.Models; 
 
 namespace FitHubAdmin.DTOs
 {
+    //Ce asteaptă serverul pentru a crea un abonament 
     public class CreateAbonamentDto
     {
-        // Swagger va face automat un Dropdown list pentru astea!
+       
         public TipAbonament Tip { get; set; } 
         public DurataAbonament Durata { get; set; }
         
         public int ClientId { get; set; }
     }
-
+    
+    //Ce raspunde serverul cand is se cere lsita de abonaente
     public class AbonamentResponseDto
     {
         public int Id { get; set; }
         
-        // Le punem ca string in raspuns ca sa fie citibile
+       
         public TipAbonament Tip { get; set; } 
         public DurataAbonament Durata { get; set; }
         

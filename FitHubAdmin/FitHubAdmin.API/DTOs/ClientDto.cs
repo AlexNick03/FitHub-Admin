@@ -1,11 +1,11 @@
 ﻿namespace FitHubAdmin.DTOs
-{
+{   //Ce asteapta serverul atunci cand se creeaza un client nou
     public class CreateClientDto
     {
         public string Nume { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
     }
-
+    //Ce raspunde serverul cand i se cere lista cu clienti
     public class ClientResponseDto
     {
         public int Id { get; set; }

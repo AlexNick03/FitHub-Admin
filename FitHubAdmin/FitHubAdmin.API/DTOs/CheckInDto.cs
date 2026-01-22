@@ -15,7 +15,7 @@
         public DateTime DataOra { get; set; }
     }
 
-    // Ce raspunde serverul cand ceri lista de istoric (GET)
+    // Ce raspunde serverul cand ceri lista de istoric 
     public class IstoricAccesResponseDto
     {
         public int Id { get; set; }
