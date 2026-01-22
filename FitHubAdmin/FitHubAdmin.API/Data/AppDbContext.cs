@@ -9,7 +9,7 @@ namespace FitHubAdmin.Data
 
         public DbSet<Client> Clienti { get; set; }
         
-        // Tabela pentru Abonamente
+       
         public DbSet<Abonament> Abonamente { get; set; }
         
         public DbSet<IstoricAcces> IstoricAcces { get; set; }

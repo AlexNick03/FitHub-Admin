@@ -22,8 +22,8 @@ namespace FitHubAdmin.Services
                 .Select(a => new AbonamentResponseDto
                 {
                     Id = a.Id,
-                    Tip = a.Tip,       // Convertim Enum la text
-                    Durata = a.Durata, // Convertim Enum la text
+                    Tip = a.Tip,       
+                    Durata = a.Durata, 
                     Pret = a.Pret,
                     DataStart = a.DataStart,
                     DataExpirare = a.DataExpirare,
@@ -34,14 +34,14 @@ namespace FitHubAdmin.Services
         }
 
         public async Task CreateAbonamentAsync(CreateAbonamentDto dto)
-        {   // 0. Validare client existent.
+        {   // Validare client existent.
             var existaClient = await _context.Clienti.AnyAsync(c => c.Id == dto.ClientId);
             if (!existaClient)
             {
                 // Aruncam o eroare specifica daca nu il gasim
                 throw new KeyNotFoundException($"Nu există niciun client cu ID-ul {dto.ClientId}!");
             } 
-            // A. Validare Suprapunere (codul vechi)
+            //  Validare Suprapunere (codul vechi)
             bool areAbonamentActiv = await _context.Abonamente
                 .AnyAsync(a => a.ClientId == dto.ClientId && a.DataExpirare > DateTime.Now);
 
@@ -50,7 +50,7 @@ namespace FitHubAdmin.Services
                 throw new InvalidOperationException("Acest client are deja un abonament activ!");
             }
 
-            // B. CALCUL PRET (Matricea ta de preturi)
+            // Calcul pret (Matricea ta de preturi)
             decimal pretCalculat = 0;
 
             if (dto.Durata == DurataAbonament.Lunar)
@@ -72,7 +72,7 @@ namespace FitHubAdmin.Services
                 }
             }
 
-            // C. CALCUL DATA EXPIRARE (Demo vs Real)
+            // Calcul date expirare (Demo vs Real)
             DateTime dataExpirare;
         
             if (dto.Durata == DurataAbonament.Lunar)
@@ -90,7 +90,7 @@ namespace FitHubAdmin.Services
             {
                 Tip = dto.Tip,
                 Durata = dto.Durata,
-                Pret = pretCalculat, // <--- Pretul vine din calcul, nu de la user
+                Pret = pretCalculat, //  Pretul vine din calcul, nu de la user
                 ClientId = dto.ClientId,
                 DataStart = DateTime.Now,
                 DataExpirare = dataExpirare
